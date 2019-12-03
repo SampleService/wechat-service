@@ -1,5 +1,6 @@
 package com.sampleservice.wechatservice.controller;
 
+import com.sampleservice.wechatservice.utils.MBaseUtils;
 import com.septemberhx.common.base.MResponse;
 import com.septemberhx.mclient.annotation.MApiFunction;
 import com.septemberhx.mclient.annotation.MRestApiType;
@@ -21,6 +22,10 @@ public class MainController extends MObject {
     public MResponse payFunction(@RequestBody MResponse requestData) {
         MResponse result = new MResponse();
         result.set("msg", "/pay");
+
+        if (requestData.get("interval") != null) {
+            MBaseUtils.generateStringInKBSize(10, result, (int) requestData.get("interval"));
+        }
         return result;
     }
 }
